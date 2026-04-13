@@ -544,6 +544,126 @@
       vertical-align: middle;
     }
 
+    /* ─── GOOGLE CALENDAR ────────────────── */
+    .gcal-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .gcal-wrap iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      display: block;
+      filter: invert(1) hue-rotate(180deg) brightness(0.85);
+    }
+    .cal-note {
+      padding: 0.9rem 1.2rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ─── BOOKING FORM ────────────────────── */
+    #book { background: var(--cream); }
+    .book-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .booking-form {
+      background: var(--white);
+      padding: 2.8rem;
+      box-shadow: 0 4px 30px rgba(42,61,46,0.07);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.45rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--parchment);
+      background: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--sage); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--forest);
+      color: var(--white);
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--sage); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: var(--forest);
+    }
+    .form-success h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .form-info-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--parchment);
+    }
+    .form-info-item:first-child { border-top: 1px solid var(--parchment); }
+    .form-info-icon { font-size: 1.3rem; line-height: 1; margin-top: 0.1rem; }
+    .form-info-text strong {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--forest);
+      margin-bottom: 0.2rem;
+    }
+    .form-info-text span { font-size: 0.85rem; color: #6a6a62; line-height: 1.6; }
+    @media (max-width: 768px) {
+      .book-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .booking-form { padding: 1.8rem; }
+      .gcal-wrap iframe { height: 380px; }
+    }
+
     /* ─── LOCATION ────────────────────────── */
     #location { background: var(--cream); }
     .location-grid {
@@ -809,7 +929,7 @@
     <li><a href="#amenities">Amenities</a></li>
     <li><a href="#availability">Availability</a></li>
     <li><a href="#location">Location</a></li>
-    <li><a href="#availability" class="nav-book">Book Now</a></li>
+    <li><a href="#book" class="nav-book">Book Now</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
@@ -1040,27 +1160,123 @@
         <p class="body-text">Laragh is available for short breaks and weekly stays throughout the year. Whether you're planning a summer escape or a cosy winter retreat by the stove, we'd love to welcome you.</p>
         <p class="avail-note">
           <strong>To enquire or book:</strong><br>
-          Availability is managed via our linked calendar.<br>
-          Please get in touch directly to confirm your dates and arrange your stay.
+          Check the calendar for available dates, then use the booking form below or email us directly at <a href="mailto:laraghlakeview@gmail.com" style="color:var(--sand);">laraghlakeview@gmail.com</a>
         </p>
         <br><br>
-        <a href="mailto:info@laraghcavan.ie" class="btn-primary">Send an Enquiry</a>
+        <a href="#book" class="btn-primary">Make an Enquiry</a>
       </div>
       <div>
-        <div class="calendar-widget">
-          <div class="cal-header">
-            <button class="cal-nav" onclick="calPrev()">&#8249;</button>
-            <div class="cal-month" id="calMonth">April 2026</div>
-            <button class="cal-nav" onclick="calNext()">&#8250;</button>
+        <div class="gcal-wrap">
+          <iframe
+            src="https://calendar.google.com/calendar/embed?src=laraghlakeview%40gmail.com&ctz=Europe%2FDublin&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=MONTH"
+            title="Laragh Availability Calendar"
+            scrolling="no">
+          </iframe>
+          <div class="cal-note">&#9679; Booked dates are marked on the calendar &nbsp;·&nbsp; All other dates are available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ BOOKING FORM ══════════════════ -->
+<section id="book">
+  <div class="container">
+    <div class="book-grid">
+
+      <div>
+        <p class="section-label">Make an Enquiry</p>
+        <h2 class="section-title">Request a<br><em>tentative booking</em></h2>
+        <div class="divider"></div>
+        <p class="body-text">Fill in your preferred dates and we'll get back to you within 24 hours to confirm availability and arrange your stay.</p>
+
+        <div style="margin-top:2rem;">
+          <div class="form-info-item">
+            <div class="form-info-icon">📅</div>
+            <div class="form-info-text">
+              <strong>Tentative hold</strong>
+              <span>Your dates are held provisionally while we confirm. No payment required to enquire.</span>
+            </div>
           </div>
-          <div class="cal-grid" id="calGrid"></div>
-          <div class="cal-legend">
-            <span><span class="leg-dot" style="background:rgba(107,140,110,0.6)"></span>Available</span>
-            <span><span class="leg-dot" style="background:rgba(169,100,80,0.5)"></span>Booked</span>
-            <span><span class="leg-dot" style="border:1px solid #c9b89a;background:transparent"></span>Today</span>
+          <div class="form-info-item">
+            <div class="form-info-icon">✉️</div>
+            <div class="form-info-text">
+              <strong>Quick response</strong>
+              <span>We aim to reply within 24 hours to confirm your booking.</span>
+            </div>
+          </div>
+          <div class="form-info-item">
+            <div class="form-info-icon">🔑</div>
+            <div class="form-info-text">
+              <strong>Self check-in</strong>
+              <span>Once confirmed we'll send all the details you need for a smooth arrival.</span>
+            </div>
+          </div>
+          <div class="form-info-item">
+            <div class="form-info-icon">📧</div>
+            <div class="form-info-text">
+              <strong>Or email us directly</strong>
+              <span><a href="mailto:laraghlakeview@gmail.com" style="color:var(--sage);">laraghlakeview@gmail.com</a></span>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="booking-form" id="bookingFormWrap">
+        <div id="formSuccess" class="form-success">
+          <h3>Enquiry sent!</h3>
+          <p>Thank you — we'll be in touch within 24 hours to confirm your dates.</p>
+        </div>
+        <form id="bookingForm">
+          <input type="hidden" name="_subject" value="New Booking Enquiry — Laragh Lakeview" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" name="first_name" required placeholder="Mary" />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" name="last_name" required placeholder="Murphy" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="mary@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+353 87 000 0000" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkin">Check-in Date *</label>
+              <input type="date" id="checkin" name="check_in" required />
+            </div>
+            <div class="form-group">
+              <label for="checkout">Check-out Date *</label>
+              <input type="date" id="checkout" name="check_out" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="guests">Number of Guests *</label>
+            <select id="guests" name="guests" required>
+              <option value="">Select...</option>
+              <option value="1">1 guest</option>
+              <option value="2">2 guests</option>
+              <option value="3">3 guests</option>
+              <option value="4">4 guests</option>
+              <option value="5">5 guests</option>
+              <option value="6">6 guests</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message (optional)</label>
+            <textarea id="message" name="message" placeholder="Any questions or special requests..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Enquiry</button>
+        </form>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1213,15 +1429,15 @@
       <div>
         <iframe
           class="map-embed"
-         src="https://maps.google.com/maps?q=A82+EE95,+Crover,+Mountnugent,+Co.+Cavan,+Ireland&output=embed&z=15"
-          title="Laragh location map"
+          src="https://maps.google.com/maps?q=A82+EE95,+Crover,+Mountnugent,+Co.+Cavan,+Ireland&output=embed&z=15"
+          title="Laragh location map — A82 EE95"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
         <br>
         <a
-          href="https://maps.google.com/?q=Crover,+Mountnugent,+Co.+Cavan,+A82+EE95"
+          href="https://maps.google.com/?q=A82+EE95,+Crover,+Mountnugent,+Co.+Cavan,+Ireland"
           target="_blank"
           rel="noopener"
           class="btn-solid"
@@ -1243,8 +1459,8 @@
       Whether it's a long weekend, a full week, or a group getaway — we'd love to host you at Laragh. Get in touch to check availability and arrange your stay.
     </p>
     <div class="cta-buttons">
-      <a href="mailto:info@laraghcavan.ie" class="btn-solid">Email Us</a>
-      <a href="#availability" class="btn-outline-white">Check Availability</a>
+      <a href="#book" class="btn-solid">Make an Enquiry</a>
+      <a href="mailto:laraghlakeview@gmail.com" class="btn-outline-white">laraghlakeview@gmail.com</a>
     </div>
   </div>
 </section>
@@ -1275,7 +1491,7 @@
           Crover, Co. Cavan<br>
           A82 EE95, Ireland<br>
           <br>
-          <a href="mailto:info@laraghcavan.ie" style="color:rgba(255,255,255,0.45);text-decoration:none;">info@laraghcavan.ie</a>
+          <a href="mailto:laraghlakeview@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;">laraghlakeview@gmail.com</a>
         </div>
       </div>
     </div>
@@ -1341,63 +1557,36 @@
     if (e.key === 'ArrowRight') lbNav(1);
   });
 
-  // ── Calendar
-  let calYear = 2026, calMonth = 3; // April = 3 (0-indexed)
+  // ── Booking Form → mailto
+  const bookingForm = document.getElementById('bookingForm');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fname    = document.getElementById('fname').value.trim();
+      const lname    = document.getElementById('lname').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      const phone    = document.getElementById('phone').value.trim();
+      const checkin  = document.getElementById('checkin').value;
+      const checkout = document.getElementById('checkout').value;
+      const guests   = document.getElementById('guests').value;
+      const message  = document.getElementById('message').value.trim();
 
-  // Sample booked ranges (month is 0-indexed)
-  const booked = [
-    // April
-    { y:2026, m:3, days:[18,19,20,21,22,23,24,25] },
-    // May
-    { y:2026, m:4, days:[3,4,5,6,7,8,9,24,25,26,27,28,29,30,31] },
-  ];
+      const subject = encodeURIComponent('Booking Enquiry — Laragh Lakeview');
+      const body = encodeURIComponent(
+        `Name: ${fname} ${lname}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${phone || 'Not provided'}\n` +
+        `Check-in: ${checkin}\n` +
+        `Check-out: ${checkout}\n` +
+        `Guests: ${guests}\n` +
+        `\nMessage:\n${message || 'None'}`
+      );
 
-  function isBooked(y, m, d) {
-    return booked.some(b => b.y === y && b.m === m && b.days.includes(d));
+      window.location.href = `mailto:laraghlakeview@gmail.com?subject=${subject}&body=${body}`;
+    });
   }
 
-  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-  function renderCalendar() {
-    const grid = document.getElementById('calGrid');
-    document.getElementById('calMonth').textContent = monthNames[calMonth] + ' ' + calYear;
-
-    const today = new Date();
-    const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
-    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-    // Make week start Monday
-    const startOffset = (firstDay + 6) % 7;
-
-    const dows = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    let html = dows.map(d => `<div class="cal-dow">${d}</div>`).join('');
-
-    for (let i = 0; i < startOffset; i++) {
-      html += `<div class="cal-day empty"></div>`;
-    }
-    for (let d = 1; d <= daysInMonth; d++) {
-      const isT = d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
-      const book = isBooked(calYear, calMonth, d);
-      let cls = 'cal-day';
-      if (isT) cls += ' today';
-      else if (book) cls += ' booked';
-      else cls += ' available';
-      html += `<div class="${cls}">${d}</div>`;
-    }
-    grid.innerHTML = html;
-  }
-
-  function calPrev() {
-    calMonth--;
-    if (calMonth < 0) { calMonth = 11; calYear--; }
-    renderCalendar();
-  }
-  function calNext() {
-    calMonth++;
-    if (calMonth > 11) { calMonth = 0; calYear++; }
-    renderCalendar();
-  }
-
-  renderCalendar();
+  // ── Calendar (removed — using Google Calendar embed)
 
   // ── Scroll-in animations
   const observer = new IntersectionObserver((entries) => {
@@ -1407,15 +1596,4 @@
         e.target.style.transform = 'translateY(0)';
       }
     });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.feature-card, .about-grid, .location-grid, .amenities-grid, .crover-grid').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(28px)';
-    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-    observer.observe(el);
-  });
-</script>
-
-</body>
-</html>
+  }, { threshold: 0.12
