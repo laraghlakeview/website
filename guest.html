@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guest Information — Laragh Lakeview</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #2a3d2e;
+      --sage: #6b8c6e;
+      --sage-light: #a8bfaa;
+      --cream: #f4efe5;
+      --parchment: #e8e0d0;
+      --sand: #c9b89a;
+      --charcoal: #2c2c2a;
+      --text: #3a3a35;
+      --white: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--text); background: var(--cream); }
+
+    /* ── HEADER */
+    .guest-header {
+      background: var(--forest);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .header-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; opacity: 0.7; margin-bottom: 0.5rem; }
+    .header-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; margin-bottom: 0.5rem; }
+    .header-title em { font-style: italic; color: var(--sand); }
+    .header-sub { font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.55; }
+    .welcome-note {
+      background: rgba(255,255,255,0.08);
+      max-width: 600px;
+      margin: 2rem auto 0;
+      padding: 1.4rem 2rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      opacity: 0.85;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    /* ── NAV TABS */
+    .tab-nav {
+      background: var(--charcoal);
+      display: flex;
+      overflow-x: auto;
+      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      scrollbar-width: none;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 1rem 1.4rem;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .tab-btn:hover { color: rgba(255,255,255,0.8); }
+    .tab-btn.active { color: var(--sand); border-bottom-color: var(--sand); }
+
+    /* ── MAIN CONTENT */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .section-wrap { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+
+    .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.7rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--forest); margin-bottom: 1.5rem; }
+    .section-title em { font-style: italic; }
+
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    .info-card {
+      background: white;
+      padding: 1.6rem;
+      border-left: 3px solid var(--sage-light);
+    }
+    .info-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--forest); margin-bottom: 0.6rem; }
+    .info-card p, .info-card li { font-size: 0.92rem; line-height: 1.8; color: #5a5a54; }
+    .info-card ul { margin-left: 1.2rem; }
+    .info-card .big { font-size: 1.4rem; font-family: 'Cormorant Garamond', serif; color: var(--forest); font-weight: 500; }
+
+    .highlight { background: var(--forest); color: white; padding: 1.5rem 2rem; margin-bottom: 2rem; }
+    .highlight h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--sand); }
+    .highlight p { font-size: 0.92rem; line-height: 1.8; color: rgba(255,255,255,0.75); }
+    .highlight a { color: var(--sand); }
+
+    .step-list { list-style: none; counter-reset: steps; margin-bottom: 2rem; }
+    .step-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--parchment);
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: #4a4a44;
+    }
+    .step-list li::before {
+      content: counter(steps);
+      background: var(--forest);
+      color: white;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .doc-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 1.3rem 1.6rem;
+      margin-bottom: 0.8rem;
+      border: 1px solid var(--parchment);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .doc-link:hover { border-color: var(--sage); transform: translateX(4px); }
+    .doc-link-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--forest); }
+    .doc-link-desc { font-size: 0.82rem; color: #888; margin-top: 0.2rem; }
+    .doc-link-arrow { color: var(--sage); font-size: 1.3rem; }
+
+    .appliance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .appliance-card {
+      background: white;
+      padding: 1.4rem;
+      text-align: center;
+      border: 1px solid var(--parchment);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .appliance-card:hover { border-color: var(--sage); }
+    .appliance-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+    .appliance-name { font-size: 0.85rem; color: var(--forest); font-weight: 500; }
+    .appliance-detail { display: none; background: var(--parchment); padding: 1.2rem 1.5rem; margin-top: -1px; margin-bottom: 1rem; font-size: 0.88rem; line-height: 1.8; color: #5a5a54; }
+    .appliance-detail.open { display: block; }
+
+    .rule-list { list-style: none; }
+    .rule-list li {
+      display: flex;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--parchment);
+      font-size: 0.93rem;
+      color: #4a4a44;
+      line-height: 1.6;
+    }
+    .rule-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    .emergency-card {
+      background: #c0392b;
+      color: white;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1rem;
+    }
+    .emergency-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 0.4rem; }
+    .emergency-card .number { font-size: 2rem; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.05em; }
+
+    .taxi-card {
+      background: white;
+      border: 1px solid var(--parchment);
+      padding: 1.3rem 1.6rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .taxi-name { font-weight: 500; font-size: 0.95rem; color: var(--forest); }
+    .taxi-area { font-size: 0.82rem; color: #888; }
+    .taxi-number { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--sage); }
+
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.82rem;
+    }
+    footer a { color: var(--sand); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .appliance-grid { grid-template-columns: 1fr 1fr; }
+      .section-wrap { padding: 2rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="guest-header">
+  <div class="header-logo">Laragh</div>
+  <h1 class="header-title">Welcome to <em>Laragh</em></h1>
+  <p class="header-sub">Your Guest Information Guide</p>
+  <div class="welcome-note">
+    We're so glad to have you here. This page has everything you need for a comfortable and enjoyable stay. If you can't find what you need, just drop us a message at <a href="mailto:laraghlakeview@gmail.com" style="color:var(--sand);">laraghlakeview@gmail.com</a>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('arrival')">🔑 Arrival</button>
+  <button class="tab-btn" onclick="showTab('house')">🏠 House Guide</button>
+  <button class="tab-btn" onclick="showTab('appliances')">🍳 Appliances</button>
+  <button class="tab-btn" onclick="showTab('rules')">📋 House Rules</button>
+  <button class="tab-btn" onclick="showTab('local')">📍 Local Area</button>
+  <button class="tab-btn" onclick="showTab('emergency')">🚨 Emergency</button>
+  <button class="tab-btn" onclick="showTab('documents')">📄 Documents</button>
+  <button class="tab-btn" onclick="showTab('checkout')">🧹 Check-out</button>
+</div>
+
+<!-- ═══ ARRIVAL ═══ -->
+<div class="tab-content active" id="tab-arrival">
+  <div class="section-wrap">
+    <p class="section-label">Getting In</p>
+    <h2 class="section-title">Arrival & <em>Check-in</em></h2>
+
+    <div class="highlight">
+      <h3>Check-in is from 4:00 PM</h3>
+      <p>The property operates self check-in — no need to wait for anyone. Your access details are below. If you have any difficulty, call or text us immediately.</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>🔑 Key / Access Code</h3>
+        <p class="big">[CODE HERE]</p>
+        <p>Enter this code on the key safe located [LOCATION e.g. "beside the front door"]. Return the key to the safe when leaving.</p>
+      </div>
+      <div class="info-card">
+        <h3>📶 WiFi</h3>
+        <p><strong>Network:</strong> [WIFI NAME]<br>
+        <strong>Password:</strong> [WIFI PASSWORD]</p>
+      </div>
+      <div class="info-card">
+        <h3>🚗 Parking</h3>
+        <p>Private parking is available [DESCRIBE LOCATION — e.g. "in the driveway in front of the house"]. Please do not block the gate.</p>
+      </div>
+      <div class="info-card">
+        <h3>🗑️ Bins</h3>
+        <p><strong>General waste:</strong> Black bin<br>
+        <strong>Recycling:</strong> Green bin<br>
+        <strong>Bin collection:</strong> [DAY] morning</p>
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-bottom:1.5rem;">
+      <h3>📍 Address for Sat Nav</h3>
+      <p>Laragh, Near Mountnugent, Crover, Co. Cavan, A82 EE95<br><br>
+      <a href="https://maps.google.com/?q=A82+EE95" target="_blank" style="color:var(--sage);">Open in Google Maps →</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HOUSE GUIDE ═══ -->
+<div class="tab-content" id="tab-house">
+  <div class="section-wrap">
+    <p class="section-label">The Property</p>
+    <h2 class="section-title">House <em>Guide</em></h2>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>🛏️ Bedroom 1 (En-suite)</h3>
+        <ul>
+          <li>Double bed</li>
+          <li>En-suite shower & WC</li>
+          <li>Wardrobe & dresser</li>
+          <li>Extra blankets in wardrobe</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🛏️ Bedroom 2</h3>
+        <ul>
+          <li>Double bed + single bed</li>
+          <li>Shared bathroom across hall</li>
+          <li>Wardrobe & dresser</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🛏️ Bedroom 3</h3>
+        <ul>
+          <li>Double bed</li>
+          <li>Shared bathroom</li>
+          <li>Wardrobe</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🛁 Bathroom</h3>
+        <ul>
+          <li>Shower over bath</li>
+          <li>WC & sink</li>
+          <li>Towels provided — please use these, not decorative ones</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🔥 Wood-burning Stove</h3>
+        <p>Logs and kindling are provided in the [LOCATION]. Please ensure the stove guard is in place when leaving the room. Ash can be left — we'll clean it after your stay.</p>
+      </div>
+      <div class="info-card">
+        <h3>🌡️ Heating</h3>
+        <p>The central heating thermostat is located [LOCATION]. Set to your preferred temperature. The immersion for hot water is [LOCATION] — allow 30 mins for hot water.</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <h3>💡 Useful to know</h3>
+      <p>The fuse box is located [LOCATION]. The stop cock (water mains) is under the kitchen sink. If you notice any maintenance issues, please let us know at <a href="mailto:laraghlakeview@gmail.com">laraghlakeview@gmail.com</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ APPLIANCES ═══ -->
+<div class="tab-content" id="tab-appliances">
+  <div class="section-wrap">
+    <p class="section-label">How Things Work</p>
+    <h2 class="section-title">Appliance <em>Guide</em></h2>
+    <p style="margin-bottom:2rem; color:#6a6a62; font-size:0.95rem;">Click any appliance for instructions.</p>
+
+    <div class="appliance-grid">
+      <div class="appliance-card" onclick="toggleAppliance('washing')">
+        <div class="appliance-icon">🫧</div>
+        <div class="appliance-name">Washing Machine</div>
+      </div>
+      <div class="appliance-card" onclick="toggleAppliance('dishwasher')">
+        <div class="appliance-icon">🍽️</div>
+        <div class="appliance-name">Dishwasher</div>
+      </div>
+      <div class="appliance-card" onclick="toggleAppliance('cooker')">
+        <div class="appliance-icon">🍳</div>
+        <div class="appliance-name">Cooker & Hob</div>
+      </div>
+      <div class="appliance-card" onclick="toggleAppliance('airfryer')">
+        <div class="appliance-icon">🌀</div>
+        <div class="appliance-name">Air Fryer</div>
+      </div>
+      <div class="appliance-card" onclick="toggleAppliance('coffee')">
+        <div class="appliance-icon">☕</div>
+        <div class="appliance-name">Coffee Machine</div>
+      </div>
+      <div class="appliance-card" onclick="toggleAppliance('tv')">
+        <div class="appliance-icon">📺</div>
+        <div class="appliance-name">Smart TV</div>
+      </div>
+      <div class="appliance-card" onclick="toggleAppliance('soda')">
+        <div class="appliance-icon">🫧</div>
+        <div class="appliance-name">SodaStream</div>
+      </div>
+      <div class="appliance-card" onclick="toggleAppliance('stove')">
+        <div class="appliance-icon">🔥</div>
+        <div class="appliance-name">Wood Stove</div>
+      </div>
+      <div class="appliance-card" onclick="toggleAppliance('bbq')">
+        <div class="appliance-icon">🥩</div>
+        <div class="appliance-name">BBQ</div>
+      </div>
+    </div>
+
+    <div class="appliance-detail" id="detail-washing">
+      <strong>Washing Machine</strong><br>
+      Located [LOCATION]. Detergent is under the sink. Standard programme is 40°C cotton. Please run a spin cycle before removing clothes. The manual is [LOCATION/link].
+    </div>
+    <div class="appliance-detail" id="detail-dishwasher">
+      <strong>Dishwasher</strong><br>
+      Tablets are under the sink. Load dishes, add a tablet to the dispenser drawer, select programme (Eco 50° is recommended). Do not use regular washing-up liquid. Run a rinse-aid check if dishes are streaky.
+    </div>
+    <div class="appliance-detail" id="detail-cooker">
+      <strong>Cooker & Hob</strong><br>
+      Electric hob — turn dial to desired heat level. Oven: turn dial to temperature and allow 10 mins to preheat. Grill is [top element / separate drawer]. Fan-assisted oven — reduce recipe temperatures by 10–20°C.
+    </div>
+    <div class="appliance-detail" id="detail-airfryer">
+      <strong>Air Fryer</strong><br>
+      Plug in on the counter. Set temperature and time using the dials/touch panel. Allow to preheat for 3 mins. Do not use aerosol sprays inside. Basket is dishwasher safe.
+    </div>
+    <div class="appliance-detail" id="detail-coffee">
+      <strong>Coffee Machine</strong><br>
+      [DESCRIBE TYPE — e.g. "Pod machine: lift the top, insert pod, close and press the cup size button. Pods are in the [LOCATION]. Empty pod drawer before leaving."]. Descaling sachets are in the [LOCATION].
+    </div>
+    <div class="appliance-detail" id="detail-tv">
+      <strong>Smart TV</strong><br>
+      Remote is on the coffee table. Press power button. For smart features press the Home button. Netflix, YouTube and other apps are available. Please log out of any personal accounts before you leave. WiFi password: [WIFI PASSWORD].
+    </div>
+    <div class="appliance-detail" id="detail-soda">
+      <strong>SodaStream</strong><br>
+      Fill the bottle with cold water to the fill line. Screw bottle into machine. Press the button [once for light / twice for medium / three times for sparkling]. Remove bottle carefully — point away from face. CO₂ cylinder is on the [LOCATION] — let us know if it runs empty.
+    </div>
+    <div class="appliance-detail" id="detail-stove">
+      <strong>Wood-burning Stove</strong><br>
+      1. Open the air vent fully. 2. Place 2–3 firelighters and kindling in the grate. 3. Light and allow to catch for 5 mins. 4. Add small logs once kindling is burning well. 5. Reduce air vent once fire is established. Never leave unattended. Use the fireguard. Logs and kindling in [LOCATION].
+    </div>
+    <div class="appliance-detail" id="detail-bbq">
+      <strong>BBQ</strong><br>
+      Located [LOCATION/garden]. [GAS/CHARCOAL] BBQ. [Gas: turn gas on, press ignite button. Allow to preheat 10 mins. Turn off gas at cylinder after use.] Please clean the grill after use. Charcoal/gas is [LOCATION].
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HOUSE RULES ═══ -->
+<div class="tab-content" id="tab-rules">
+  <div class="section-wrap">
+    <p class="section-label">Please Read</p>
+    <h2 class="section-title">House <em>Rules</em></h2>
+
+    <ul class="rule-list">
+      <li><span class="rule-icon">🚭</span><span><strong>No smoking</strong> inside the property. Smokers please use outside area and dispose of butts responsibly.</span></li>
+      <li><span class="rule-icon">🐾</span><span><strong>No pets</strong> unless previously agreed in writing.</span></li>
+      <li><span class="rule-icon">🔇</span><span><strong>Quiet hours 10 PM – 8 AM.</strong> Please be respectful of neighbours in this rural area.</span></li>
+      <li><span class="rule-icon">👥</span><span><strong>Maximum 7 guests.</strong> Unregistered guests are not permitted to stay overnight.</span></li>
+      <li><span class="rule-icon">🔑</span><span><strong>Lock up.</strong> Please lock all doors and windows when leaving the property.</span></li>
+      <li><span class="rule-icon">🕚</span><span><strong>Check-out by 11 AM.</strong> Late check-out fees apply — please see the Terms & Conditions.</span></li>
+      <li><span class="rule-icon">🍽️</span><span><strong>Wash up.</strong> Please leave the kitchen clean — wash all dishes or run the dishwasher before departure.</span></li>
+      <li><span class="rule-icon">🗑️</span><span><strong>Bins.</strong> Empty the kitchen bin and leave rubbish in the outdoor bins provided.</span></li>
+      <li><span class="rule-icon">💧</span><span><strong>Water safety.</strong> Lough Sheelin is nearby. Children must be supervised near the water at all times.</span></li>
+      <li><span class="rule-icon">🔥</span><span><strong>Fire safety.</strong> Never leave candles or the stove unattended. Fire extinguisher is located [LOCATION].</span></li>
+      <li><span class="rule-icon">📱</span><span><strong>Report issues.</strong> Please report any damage or breakages promptly — accidents happen and we appreciate honesty.</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ LOCAL AREA ═══ -->
+<div class="tab-content" id="tab-local">
+  <div class="section-wrap">
+    <p class="section-label">Explore</p>
+    <h2 class="section-title">Local <em>Area Guide</em></h2>
+
+    <div class="highlight">
+      <h3>🏨 Crover House Hotel — 15 min walk</h3>
+      <p>Award-winning 4-star country house hotel on the shores of Lough Sheelin. Excellent restaurant, Sailor's Bar, and lakeside terrace. <a href="https://www.croverhouse.ie" target="_blank">croverhouse.ie</a></p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>🛒 Nearest Shops</h3>
+        <ul>
+          <li>Kilnaleck — 10 min drive (SuperValu)</li>
+          <li>Ballyjamesduff — 10 min drive</li>
+          <li>Virginia — 20 min drive</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🍽️ Eating Out</h3>
+        <ul>
+          <li>Crover House Restaurant — 15 min walk</li>
+          <li>Various pubs & cafés in Ballyjamesduff</li>
+          <li>Virginia town — 20 min drive</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🎣 Activities</h3>
+        <ul>
+          <li>Trout & pike fishing on Lough Sheelin</li>
+          <li>Walking trails along the lakeshore</li>
+          <li>Golf at Crover House Hotel (9-hole)</li>
+          <li>Cycling — quiet country roads</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🏛️ Sights & Attractions</h3>
+        <ul>
+          <li>Cavan County Museum, Ballyjamesduff</li>
+          <li>Mullaghmeen Forest — forest walks</li>
+          <li>Virginia — picturesque lakeside town</li>
+          <li>Oldcastle & Loughcrew Cairns</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>⛽ Fuel</h3>
+        <ul>
+          <li>Kilnaleck — 10 min drive</li>
+          <li>Ballyjamesduff — 10 min drive</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🏥 Pharmacy / Medical</h3>
+        <ul>
+          <li>Pharmacy: Ballyjamesduff — 10 min</li>
+          <li>GP: Virginia / Ballyjamesduff</li>
+          <li>Hospital: Cavan General — 35 min</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EMERGENCY ═══ -->
+<div class="tab-content" id="tab-emergency">
+  <div class="section-wrap">
+    <p class="section-label">Important Numbers</p>
+    <h2 class="section-title">Emergency <em>Contacts</em></h2>
+
+    <div class="emergency-card">
+      <h3>🚨 Emergency Services</h3>
+      <div class="number">999 / 112</div>
+      <p style="margin-top:0.4rem; opacity:0.8; font-size:0.9rem;">Police (Garda) · Fire Brigade · Ambulance</p>
+    </div>
+
+    <div class="emergency-card" style="background:#e67e22;">
+      <h3>🏥 Cavan General Hospital</h3>
+      <div class="number">049 437 6000</div>
+      <p style="margin-top:0.4rem; opacity:0.9; font-size:0.9rem;">Lisdarn, Cavan — approx. 35 min drive</p>
+    </div>
+
+    <div class="info-grid" style="margin-top:1.5rem;">
+      <div class="info-card">
+        <h3>📞 Property Owner</h3>
+        <p><a href="mailto:laraghlakeview@gmail.com" style="color:var(--sage);">laraghlakeview@gmail.com</a><br>
+        <span style="font-size:0.85rem; color:#888;">For non-emergencies only</span></p>
+      </div>
+      <div class="info-card">
+        <h3>🚓 Cavan Garda Station</h3>
+        <p>049 436 8800</p>
+      </div>
+      <div class="info-card">
+        <h3>🔥 Fire — Gas Leak</h3>
+        <p>Evacuate immediately. Call 999. Do not use switches or phones inside. Muster point: end of driveway.</p>
+      </div>
+      <div class="info-card">
+        <h3>💧 Burst Pipe / Water</h3>
+        <p>Stop cock under kitchen sink — turn clockwise to stop water. Then call the owner.</p>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-top:1.5rem;">
+      <h3>🧯 Fire Safety</h3>
+      <p>Fire extinguisher: [LOCATION] · Smoke alarms: hallway & kitchen · Carbon monoxide detector: living room · Fire escape: out front door or back door via kitchen</p>
+    </div>
+
+    <h2 class="section-title" style="margin-top:2rem;">🚕 Local <em>Taxis</em></h2>
+
+    <div class="taxi-card">
+      <div>
+        <div class="taxi-name">Local Taxi — Virginia</div>
+        <div class="taxi-area">Virginia, Co. Cavan area</div>
+      </div>
+      <div class="taxi-number">[NUMBER]</div>
+    </div>
+    <div class="taxi-card">
+      <div>
+        <div class="taxi-name">Local Taxi — Ballyjamesduff</div>
+        <div class="taxi-area">Ballyjamesduff & surrounds</div>
+      </div>
+      <div class="taxi-number">[NUMBER]</div>
+    </div>
+    <div class="taxi-card">
+      <div>
+        <div class="taxi-name">Free Now / Uber</div>
+        <div class="taxi-area">App-based — limited in rural areas</div>
+      </div>
+      <div class="taxi-number">App</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DOCUMENTS ═══ -->
+<div class="tab-content" id="tab-documents">
+  <div class="section-wrap">
+    <p class="section-label">Downloads</p>
+    <h2 class="section-title">Documents & <em>Manuals</em></h2>
+    <p style="margin-bottom:2rem; color:#6a6a62; font-size:0.95rem;">Click any document to open or download.</p>
+
+    <a href="terms.html" target="_blank" class="doc-link">
+      <div>
+        <div class="doc-link-title">Terms & Conditions</div>
+        <div class="doc-link-desc">Full rental terms including deposit, cancellation and damage policies</div>
+      </div>
+      <div class="doc-link-arrow">→</div>
+    </a>
+
+    <a href="contract.html" target="_blank" class="doc-link">
+      <div>
+        <div class="doc-link-title">Booking Contract</div>
+        <div class="doc-link-desc">Holiday rental agreement — to be signed before your stay</div>
+      </div>
+      <div class="doc-link-arrow">→</div>
+    </a>
+
+    <a href="#" class="doc-link" style="opacity:0.5; pointer-events:none;">
+      <div>
+        <div class="doc-link-title">Washing Machine Manual</div>
+        <div class="doc-link-desc">Coming soon — add PDF link here</div>
+      </div>
+      <div class="doc-link-arrow">→</div>
+    </a>
+
+    <a href="#" class="doc-link" style="opacity:0.5; pointer-events:none;">
+      <div>
+        <div class="doc-link-title">TV & Smart Features Guide</div>
+        <div class="doc-link-desc">Coming soon — add PDF link here</div>
+      </div>
+      <div class="doc-link-arrow">→</div>
+    </a>
+
+    <a href="#" class="doc-link" style="opacity:0.5; pointer-events:none;">
+      <div>
+        <div class="doc-link-title">Wood Stove Instructions</div>
+        <div class="doc-link-desc">Coming soon — add PDF link here</div>
+      </div>
+      <div class="doc-link-arrow">→</div>
+    </a>
+
+    <div style="margin-top:2rem; padding:1.4rem; background:var(--parchment); font-size:0.88rem; color:#6a6a62; line-height:1.7;">
+      📎 <strong>To add a manual:</strong> upload the PDF to your GitHub repo and replace the <code>#</code> href above with the filename, e.g. <code>washing-machine.pdf</code>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CHECK-OUT ═══ -->
+<div class="tab-content" id="tab-checkout">
+  <div class="section-wrap">
+    <p class="section-label">Before You Leave</p>
+    <h2 class="section-title">Check-out <em>Guide</em></h2>
+
+    <div class="highlight">
+      <h3>🕚 Check-out by 11:00 AM</h3>
+      <p>Please ensure you have vacated the property by 11 AM. Late check-out fees apply — see Terms & Conditions. If you need a later checkout please contact us at least 48 hours in advance.</p>
+    </div>
+
+    <p style="margin-bottom:1.5rem; color:#6a6a62;">Please work through this checklist before you leave:</p>
+
+    <ol class="step-list">
+      <li>Wash all dishes or ensure the dishwasher has been run and emptied.</li>
+      <li>Wipe down kitchen surfaces, hob and oven if used.</li>
+      <li>Empty the kitchen bin into the outdoor bins.</li>
+      <li>Remove all food from the fridge and cupboards.</li>
+      <li>Strip the beds and leave used linen in a pile on the bedroom floor.</li>
+      <li>Leave used towels in the bathroom.</li>
+      <li>Ensure the wood stove is fully extinguished and the guard is in place.</li>
+      <li>Turn off all lights, heating and appliances.</li>
+      <li>Close and lock all windows.</li>
+      <li>Check all rooms for personal belongings.</li>
+      <li>Lock the front door and return the key to the key safe.</li>
+      <li>Send a quick message to let us know you've checked out — we appreciate it!</li>
+    </ol>
+
+    <div class="info-card" style="margin-top:1.5rem;">
+      <h3>📦 Forgotten something?</h3>
+      <p>If you've left anything behind, contact us at <a href="mailto:laraghlakeview@gmail.com" style="color:var(--sage);">laraghlakeview@gmail.com</a> as soon as possible. We'll do our best to post items back to you.</p>
+    </div>
+
+    <div class="info-card" style="margin-top:1rem;">
+      <h3>💬 Leave a Review</h3>
+      <p>We'd love to hear how your stay was! A review on Google or Airbnb makes a huge difference to small holiday lets. Thank you for staying at Laragh. 🙏</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Laragh Lakeview · Near Mountnugent · Crover · Co. Cavan · A82 EE95</p>
+  <p style="margin-top:0.5rem;"><a href="mailto:laraghlakeview@gmail.com">laraghlakeview@gmail.com</a></p>
+  <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">This page is for guests only. Please do not share the link publicly.</p>
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleAppliance(id) {
+    const el = document.getElementById('detail-' + id);
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.appliance-detail').forEach(d => d.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+</script>
+</body>
+</html>
