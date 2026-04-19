@@ -926,6 +926,7 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#surroundings">Surroundings</a></li>
     <li><a href="#amenities">Amenities</a></li>
     <li><a href="#availability">Availability</a></li>
     <li><a href="#location">Location</a></li>
@@ -1119,24 +1120,16 @@
       <div class="masonry-label">Kitchen</div>
     </div>
     <div class="masonry-item" onclick="openLightbox(3)">
-      <img src="lake-pier.jpg" alt="Lough Sheelin pier" loading="lazy"/>
-      <div class="masonry-label">Lough Sheelin</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox(4)">
       <img src="bedroom1.jpg" alt="Bedroom" loading="lazy"/>
       <div class="masonry-label">Bedroom</div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(5)">
+    <div class="masonry-item" onclick="openLightbox(4)">
       <img src="bedroom2.jpg" alt="Bedroom" loading="lazy"/>
       <div class="masonry-label">Bedroom</div>
     </div>
-    <div class="masonry-item" onclick="openLightbox(6)">
+    <div class="masonry-item" onclick="openLightbox(5)">
       <img src="bathroom.jpg" alt="Open plan living and kitchen" loading="lazy"/>
       <div class="masonry-label">Open Plan Living</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox(7)">
-      <img src="countryside.jpg" alt="Co. Cavan countryside" loading="lazy"/>
-      <div class="masonry-label">Cavan Countryside</div>
     </div>
   </div>
 </section>
@@ -1147,6 +1140,45 @@
   <button class="lb-prev" onclick="lbNav(-1)">&#8249;</button>
   <img id="lbImg" src="" alt="Gallery image" />
   <button class="lb-next" onclick="lbNav(1)">&#8250;</button>
+</div>
+
+<!-- ═══════════════════ SURROUNDING AREA ══════════════════ -->
+<section id="surroundings" style="background: var(--cream); padding-top: 5rem; padding-bottom: 0;">
+  <div class="container">
+    <div class="gallery-header">
+      <p class="section-label">The Grounds & Beyond</p>
+      <h2 class="section-title">Surrounding <em>Area</em></h2>
+      <div class="divider"></div>
+      <p class="body-text" style="margin-bottom: 2.5rem;">Step outside and discover the breathtaking natural setting that makes Laragh so special — from the tranquil shores of Lough Sheelin at your doorstep to the rolling green hills of Co. Cavan.</p>
+    </div>
+  </div>
+
+  <div class="masonry" id="masonry-surroundings">
+    <div class="masonry-item" onclick="openOutdoorLightbox(0)">
+      <img src="lake-pier.jpg" alt="Lough Sheelin pier" loading="lazy"/>
+      <div class="masonry-label">Lough Sheelin</div>
+    </div>
+    <div class="masonry-item" onclick="openOutdoorLightbox(1)">
+      <img src="grounds.jpg" alt="Property grounds leading to the lake" loading="lazy"/>
+      <div class="masonry-label">The Grounds</div>
+    </div>
+    <div class="masonry-item" onclick="openOutdoorLightbox(2)">
+      <img src="lake-picnic.jpg" alt="Lough Sheelin lakeside" loading="lazy"/>
+      <div class="masonry-label">Lakeside</div>
+    </div>
+    <div class="masonry-item" onclick="openOutdoorLightbox(3)">
+      <img src="countryside.jpg" alt="Co. Cavan countryside" loading="lazy"/>
+      <div class="masonry-label">Cavan Countryside</div>
+    </div>
+  </div>
+</section>
+
+<!-- Outdoor Lightbox -->
+<div class="lightbox" id="outdoor-lightbox">
+  <button class="lb-close" onclick="closeOutdoorLightbox()">✕</button>
+  <button class="lb-prev" onclick="outdoorLbNav(-1)">&#8249;</button>
+  <img id="outdoorLbImg" src="" alt="Outdoor gallery image" />
+  <button class="lb-next" onclick="outdoorLbNav(1)">&#8250;</button>
 </div>
 
 <!-- ═══════════════════ AVAILABILITY ══════════════════ -->
@@ -1432,6 +1464,7 @@
         <ul class="footer-links">
           <li><a href="#about">About</a></li>
           <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#surroundings">Surroundings</a></li>
           <li><a href="#amenities">Amenities</a></li>
           <li><a href="#availability">Availability</a></li>
           <li><a href="#location">Location</a></li>
@@ -1479,11 +1512,9 @@
     'dining-lake.jpg',
     'living-room.jpg',
     'kitchen.jpg',
-    'lake-pier.jpg',
     'bedroom1.jpg',
     'bedroom2.jpg',
-    'bathroom.jpg',
-    'countryside.jpg'
+    'bathroom.jpg'
   ];
   let lbIndex = 0;
 
@@ -1509,6 +1540,39 @@
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') lbNav(-1);
     if (e.key === 'ArrowRight') lbNav(1);
+  });
+
+  // ── Outdoor Lightbox
+  const outdoorImages = [
+    'lake-pier.jpg',
+    'grounds.jpg',
+    'lake-picnic.jpg',
+    'countryside.jpg'
+  ];
+  let outdoorLbIndex = 0;
+
+  function openOutdoorLightbox(i) {
+    outdoorLbIndex = i;
+    document.getElementById('outdoorLbImg').src = outdoorImages[i];
+    document.getElementById('outdoor-lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeOutdoorLightbox() {
+    document.getElementById('outdoor-lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function outdoorLbNav(dir) {
+    outdoorLbIndex = (outdoorLbIndex + dir + outdoorImages.length) % outdoorImages.length;
+    document.getElementById('outdoorLbImg').src = outdoorImages[outdoorLbIndex];
+  }
+  document.getElementById('outdoor-lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeOutdoorLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('outdoor-lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeOutdoorLightbox();
+    if (e.key === 'ArrowLeft') outdoorLbNav(-1);
+    if (e.key === 'ArrowRight') outdoorLbNav(1);
   });
 
   // ── Booking Form → mailto
