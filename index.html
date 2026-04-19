@@ -359,6 +359,86 @@
     /* ─── GALLERY ─────────────────────────── */
     #gallery { background: var(--cream); padding-bottom: 0; }
     .gallery-header { margin-bottom: 3rem; }
+
+    /* Carousel */
+    .carousel-wrap {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .carousel-track-outer {
+      overflow: hidden;
+      border-radius: 0;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .carousel-slide {
+      flex: 0 0 100%;
+      position: relative;
+      cursor: pointer;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.97);
+      transition: filter 0.3s;
+    }
+    .carousel-slide:hover img { filter: brightness(1.03); }
+    .carousel-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.4rem 1.6rem 1rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.5));
+      color: var(--white);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--forest);
+      color: var(--white);
+      border: none;
+      width: 42px;
+      height: 42px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .carousel-btn:hover { background: var(--sage); }
+    .carousel-btn.prev { left: 0; }
+    .carousel-btn.next { right: 0; }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+    }
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sand);
+      opacity: 0.35;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .carousel-dot.active { opacity: 1; transform: scale(1.3); background: var(--forest); }
+
+    /* keep masonry styles for surroundings section */
     .masonry {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -909,6 +989,7 @@
       section { padding: 4rem 0; }
       .container { padding: 0 1.4rem; }
       .features-grid { grid-template-columns: 1fr; }
+      .carousel-slide img { height: 340px; }
       .masonry { grid-template-columns: 1fr 1fr; gap: 4px; }
       .intro-strip .container { flex-direction: column; gap: 1.8rem; }
       .strip-divider { width: 60px; height: 1px; }
@@ -1104,32 +1185,39 @@
       <h2 class="section-title">Inside <em>Laragh</em></h2>
       <div class="divider"></div>
     </div>
-  </div>
 
-  <div class="masonry" id="masonry">
-    <div class="masonry-item" onclick="openLightbox(0)">
-      <img src="dining-lake.jpg" alt="Dining room with lake view" loading="lazy"/>
-      <div class="masonry-label">Dining · Lake View</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox(1)">
-      <img src="living-room.jpg" alt="Living room with fireplace" loading="lazy"/>
-      <div class="masonry-label">Living Room</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox(2)">
-      <img src="kitchen.jpg" alt="Kitchen" loading="lazy"/>
-      <div class="masonry-label">Kitchen</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox(3)">
-      <img src="bedroom1.jpg" alt="Bedroom" loading="lazy"/>
-      <div class="masonry-label">Bedroom</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox(4)">
-      <img src="bedroom2.jpg" alt="Bedroom" loading="lazy"/>
-      <div class="masonry-label">Bedroom</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox(5)">
-      <img src="bathroom.jpg" alt="Open plan living and kitchen" loading="lazy"/>
-      <div class="masonry-label">Open Plan Living</div>
+    <div class="carousel-wrap">
+      <button class="carousel-btn prev" onclick="carouselNav(-1)" aria-label="Previous">&#8249;</button>
+      <div class="carousel-track-outer">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide" onclick="openLightbox(0)">
+            <img src="dining-lake.jpg" alt="Dining room with lake view" loading="lazy"/>
+            <div class="carousel-caption">Dining · Lake View</div>
+          </div>
+          <div class="carousel-slide" onclick="openLightbox(1)">
+            <img src="living-room.jpg" alt="Living room with fireplace" loading="lazy"/>
+            <div class="carousel-caption">Living Room</div>
+          </div>
+          <div class="carousel-slide" onclick="openLightbox(2)">
+            <img src="kitchen.jpg" alt="Kitchen" loading="lazy"/>
+            <div class="carousel-caption">Kitchen</div>
+          </div>
+          <div class="carousel-slide" onclick="openLightbox(3)">
+            <img src="bedroom1.jpg" alt="Bedroom" loading="lazy"/>
+            <div class="carousel-caption">Bedroom</div>
+          </div>
+          <div class="carousel-slide" onclick="openLightbox(4)">
+            <img src="bedroom2.jpg" alt="Bedroom" loading="lazy"/>
+            <div class="carousel-caption">Bedroom</div>
+          </div>
+          <div class="carousel-slide" onclick="openLightbox(5)">
+            <img src="bathroom.jpg" alt="Open plan living and kitchen" loading="lazy"/>
+            <div class="carousel-caption">Open Plan Living</div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn next" onclick="carouselNav(1)" aria-label="Next">&#8250;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
   </div>
 </section>
@@ -1474,7 +1562,7 @@
     });
   });
 
-  // ── Lightbox
+  // ── Carousel
   const images = [
     'dining-lake.jpg',
     'living-room.jpg',
@@ -1483,6 +1571,40 @@
     'bedroom2.jpg',
     'bathroom.jpg'
   ];
+  let carouselIndex = 0;
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+
+  // Build dots
+  images.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function goToSlide(i) {
+    carouselIndex = i;
+    track.style.transform = `translateX(-${i * 100}%)`;
+    document.querySelectorAll('.carousel-dot').forEach((d, idx) => {
+      d.classList.toggle('active', idx === i);
+    });
+  }
+
+  function carouselNav(dir) {
+    goToSlide((carouselIndex + dir + images.length) % images.length);
+  }
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) carouselNav(diff > 0 ? 1 : -1);
+  });
+
+  // ── Lightbox
   let lbIndex = 0;
 
   function openLightbox(i) {
@@ -1503,10 +1625,12 @@
     if (e.target === this) closeLightbox();
   });
   document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') lbNav(-1);
-    if (e.key === 'ArrowRight') lbNav(1);
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+      return;
+    }
   });
 
   // ── Outdoor Lightbox
