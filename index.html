@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -985,8 +986,8 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap">
-        <img src="dining-lake.jpg" alt="Dining room overlooking Lough Sheelin" class="about-img-main" />
-        <img src="grounds.jpg" alt="Property grounds" class="about-img-float" />
+        <img src="kitchentable.jpg" alt="Dining room overlooking Lough Sheelin" class="about-img-main" />
+        <img src="housefront.jpg" alt="Laragh house exterior" class="about-img-float" />
       </div>
       <div class="about-text">
         <p class="section-label">The Property</p>
@@ -1155,18 +1156,24 @@
 
   <div class="masonry" id="masonry-surroundings">
     <div class="masonry-item" onclick="openOutdoorLightbox(0)">
+      <img src="housefront.jpg" alt="Laragh house exterior" loading="lazy"/>
+      <div class="masonry-label">The House</div>
+    </div>
+    <div class="masonry-item" onclick="openOutdoorLightbox(1)">
+      <img src="lake-pier.jpg" alt="Lough Sheelin pier" loading="lazy"/>
+    <div class="masonry-item" onclick="openOutdoorLightbox(1)">
       <img src="lake-pier.jpg" alt="Lough Sheelin pier" loading="lazy"/>
       <div class="masonry-label">Lough Sheelin</div>
     </div>
-    <div class="masonry-item" onclick="openOutdoorLightbox(1)">
+    <div class="masonry-item" onclick="openOutdoorLightbox(2)">
       <img src="grounds.jpg" alt="Property grounds leading to the lake" loading="lazy"/>
       <div class="masonry-label">The Grounds</div>
     </div>
-    <div class="masonry-item" onclick="openOutdoorLightbox(2)">
+    <div class="masonry-item" onclick="openOutdoorLightbox(3)">
       <img src="lake-picnic.jpg" alt="Lough Sheelin lakeside" loading="lazy"/>
       <div class="masonry-label">Lakeside</div>
     </div>
-    <div class="masonry-item" onclick="openOutdoorLightbox(3)">
+    <div class="masonry-item" onclick="openOutdoorLightbox(4)">
       <img src="countryside.jpg" alt="Co. Cavan countryside" loading="lazy"/>
       <div class="masonry-label">Cavan Countryside</div>
     </div>
@@ -1544,6 +1551,7 @@
 
   // ── Outdoor Lightbox
   const outdoorImages = [
+    'housefront.jpg',
     'lake-pier.jpg',
     'grounds.jpg',
     'lake-picnic.jpg',
