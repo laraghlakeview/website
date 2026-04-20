@@ -311,9 +311,10 @@
       position: absolute;
       bottom: -2.5rem;
       right: -2.5rem;
-      width: 55%;
-      aspect-ratio: 4/3;
+      width: 65%;
+      aspect-ratio: 16/9;
       object-fit: cover;
+      object-position: center 40%;
       border: 6px solid var(--cream);
       box-shadow: 0 12px 40px rgba(0,0,0,0.15);
     }
@@ -358,10 +359,11 @@
 
     /* ─── GALLERY ─────────────────────────── */
     #gallery { background: var(--cream); padding-bottom: 0; }
+    #gallery-local { padding-top: 0; padding-bottom: 0; }
     .gallery-header { margin-bottom: 3rem; }
     .masonry {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 6px;
     }
     .masonry-item {
@@ -1098,6 +1100,7 @@
     </div>
   </div>
 
+  <div class="container">
   <div class="masonry" id="masonry">
     <div class="masonry-item" onclick="openLightbox(0)">
       <img src="Interior/MainRoomTable.jpg" alt="Dining area with lake view" loading="lazy"/>
@@ -1152,6 +1155,7 @@
       <div class="masonry-label">Bathroom</div>
     </div>
   </div>
+  </div>
 </section>
 
 <!-- ═══════════════════ LOCAL AREA GALLERY ══════════════════ -->
@@ -1162,44 +1166,43 @@
       <h2 class="section-title">Local <em>Area</em></h2>
       <div class="divider"></div>
     </div>
-  </div>
-
-  <div class="masonry" id="masonry-local">
-    <div class="masonry-item" onclick="openLightbox2(0)">
-      <img src="External/LakeImage1.jpg" alt="Lough Sheelin" loading="lazy"/>
-      <div class="masonry-label">Lough Sheelin</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox2(1)">
-      <img src="External/LakeImage2.jpg" alt="Lough Sheelin" loading="lazy"/>
-      <div class="masonry-label">Lough Sheelin</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox2(2)">
-      <img src="External/LakeImage3.jpg" alt="Lakeside at Laragh" loading="lazy"/>
-      <div class="masonry-label">Lakeside</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox2(3)">
-      <img src="External/LakePier1.jpg" alt="Lough Sheelin pier" loading="lazy"/>
-      <div class="masonry-label">The Pier</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox2(4)">
-      <img src="External/LakePier2.jpg" alt="Lakeside near Crover" loading="lazy"/>
-      <div class="masonry-label">Near Crover</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox2(5)">
-      <img src="External/LakePier3.jpg" alt="Lough Sheelin angling area" loading="lazy"/>
-      <div class="masonry-label">Angling Area</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox2(6)">
-      <img src="External/LocalScenery1.jpg" alt="Co. Cavan countryside" loading="lazy"/>
-      <div class="masonry-label">Cavan Countryside</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox2(7)">
-      <img src="External/LocalScenery2.jpg" alt="Local village" loading="lazy"/>
-      <div class="masonry-label">Local Area</div>
-    </div>
-    <div class="masonry-item" onclick="openLightbox2(8)">
-      <img src="External/LocalScenery3.jpg" alt="Stream and woodland" loading="lazy"/>
-      <div class="masonry-label">Local Woodland</div>
+    <div class="masonry" id="masonry-local">
+      <div class="masonry-item" onclick="openLightbox2(0)">
+        <img src="External/LakeImage1.jpg" alt="Lough Sheelin" loading="lazy"/>
+        <div class="masonry-label">Lough Sheelin</div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox2(1)">
+        <img src="External/LakeImage2.jpg" alt="Lough Sheelin" loading="lazy"/>
+        <div class="masonry-label">Lough Sheelin</div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox2(2)">
+        <img src="External/LakeImage3.jpg" alt="Lakeside at Laragh" loading="lazy"/>
+        <div class="masonry-label">Lakeside</div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox2(3)">
+        <img src="External/LakePier1.jpg" alt="Lough Sheelin pier" loading="lazy"/>
+        <div class="masonry-label">The Pier</div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox2(4)">
+        <img src="External/LakePier2.jpg" alt="Lakeside near Crover" loading="lazy"/>
+        <div class="masonry-label">Near Crover</div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox2(5)">
+        <img src="External/LakePier3.jpg" alt="Lough Sheelin angling area" loading="lazy"/>
+        <div class="masonry-label">Angling Area</div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox2(6)">
+        <img src="External/LocalScenery1.jpg" alt="Co. Cavan countryside" loading="lazy"/>
+        <div class="masonry-label">Cavan Countryside</div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox2(7)">
+        <img src="External/LocalScenery2.jpg" alt="Local village" loading="lazy"/>
+        <div class="masonry-label">Local Area</div>
+      </div>
+      <div class="masonry-item" onclick="openLightbox2(8)">
+        <img src="External/LocalScenery3.jpg" alt="Stream and woodland" loading="lazy"/>
+        <div class="masonry-label">Local Woodland</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1230,11 +1233,12 @@
         <div class="divider"></div>
         <p class="body-text">Laragh is available for short breaks and weekly stays throughout the year. Whether you're planning a summer escape or a cosy winter retreat by the stove, we'd love to welcome you.</p>
         <p class="avail-note">
+          <strong>Cost per night:</strong> €250 &nbsp;·&nbsp; <strong>Minimum stay:</strong> 2 nights<br>
+          Reduced nightly rates are available for longer stays — just ask when you enquire.<br><br>
           <strong>To enquire or book:</strong><br>
-          Check the calendar for available dates, then use the booking form below or email us directly at <a href="mailto:laraghlakeview@gmail.com" style="color:var(--sand);">laraghlakeview@gmail.com</a>
+          Check the calendar for available dates, then use the booking form below or email us directly at <a href="mailto:laraghlakeview@gmail.com" style="color:var(--sand);">laraghlakeview@gmail.com</a><br><br>
+          <a href="terms.html" target="_blank" style="color:var(--sand); letter-spacing:0.08em;">View full Terms &amp; Conditions →</a>
         </p>
-        <br><br>
-        <a href="#book" class="btn-primary">Make an Enquiry</a>
       </div>
       <div>
         <div class="gcal-wrap">
@@ -1250,67 +1254,12 @@
   </div>
 </section>
 
-<!-- ═══════════════════ BOOKING FORM ══════════════════ -->
-<section id="book">
-  <div class="container">
-    <div class="book-grid">
-
-      <div>
-        <p class="section-label">Make an Enquiry</p>
-        <h2 class="section-title">Request a<br><em>tentative booking</em></h2>
-        <div class="divider"></div>
-        <p class="body-text">Fill in your preferred dates and we'll get back to you within 24 hours to confirm availability and arrange your stay.</p>
-
-        <div style="margin-top:2rem;">
-          <div class="form-info-item">
-            <div class="form-info-icon">📅</div>
-            <div class="form-info-text">
-              <strong>Tentative hold</strong>
-              <span>Your dates are held provisionally while we confirm. No payment required to enquire.</span>
-            </div>
-          </div>
-          <div class="form-info-item">
-            <div class="form-info-icon">✉️</div>
-            <div class="form-info-text">
-              <strong>Quick response</strong>
-              <span>We aim to reply within 24 hours to confirm your booking.</span>
-            </div>
-          </div>
-          <div class="form-info-item">
-            <div class="form-info-icon">🔑</div>
-            <div class="form-info-text">
-              <strong>Self check-in</strong>
-              <span>Once confirmed we'll send all the details you need for a smooth arrival.</span>
-            </div>
-          </div>
-          <div class="form-info-item">
-            <div class="form-info-icon">📧</div>
-            <div class="form-info-text">
-              <strong>Or email us directly</strong>
-              <span><a href="mailto:laraghlakeview@gmail.com" style="color:var(--sage);">laraghlakeview@gmail.com</a></span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="booking-form" id="bookingFormWrap">
-        <div style="text-align:center; padding: 3rem 2rem;">
-          <p style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--forest); margin-bottom:0.6rem;">Ready to book?</p>
-          <p style="font-size:0.95rem; color:#6a6a62; margin-bottom:2rem; line-height:1.7;">Drop us an email with your preferred dates, number of guests and any questions — we'll get back to you within 24 hours.</p>
-          <a href="mailto:laraghlakeview@gmail.com?subject=Booking%20Enquiry%20%E2%80%94%20Laragh%20Lakeview&body=Hi%2C%0A%0AI%27d%20like%20to%20enquire%20about%20booking%20Laragh.%0A%0AName%3A%20%0APhone%3A%20%0ACheck-in%20date%3A%20%0ACheck-out%20date%3A%20%0ANumber%20of%20guests%3A%20%0A%0AMessage%3A%20" class="btn-solid">Email Us to Book</a>
-          <p style="margin-top:1.4rem; font-size:0.85rem; color:#9a9a90;">or email directly: <a href="mailto:laraghlakeview@gmail.com" style="color:var(--sage);">laraghlakeview@gmail.com</a></p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════════════ CROVER HOUSE ══════════════════ -->
 <section id="crover">
   <div class="container">
     <div class="crover-grid">
-      <img src="External/LakePier2.jpg" alt="Lakeside at Lough Sheelin near Crover" class="crover-img" />
+      <img src="Others/crover house.jpg" alt="Crover House Hotel" class="crover-img" />
       <div>
         <span class="crover-badge">Nearby Highlight</span>
         <p class="section-label">Just a 15-minute stroll away</p>
